@@ -1,7 +1,7 @@
 <template>
   <div class="my-6">
     <Title title="Sign In" />
-    <form @submit.prevent="nextStep" class="flex flex-col mt-20 space-y-5">
+    <form @submit.prevent="submit" class="flex flex-col mt-20 space-y-5">
       <hr />
       <Input
         type="email"
@@ -99,30 +99,8 @@ const validateFields = () => {
   isValid = isValid && !emailError.value;
 
   // Validate Password
-  if (!password.value) {
-    passwordError.value = "Password is required";
-    isValid = false;
-  } else if (password.value.length < 8) {
-    passwordError.value = "Your password must contain at least 8 characters";
-    isValid = false;
-  } else if (!/[\W_]/.test(password.value)) {
-    passwordError.value =
-      "Your password must contain at least one special character";
-    isValid = false;
-  } else if (!/[a-z]/.test(password.value)) {
-    passwordError.value =
-      "Your password must contain at least one lowercase letter";
-    isValid = false;
-  } else if (!/[A-Z]/.test(password.value)) {
-    passwordError.value =
-      "Your password must contain at least one uppercase letter";
-    isValid = false;
-  } else if (!/\d/.test(password.value)) {
-    passwordError.value = "Your password must contain at least one number";
-    isValid = false;
-  } else {
-    passwordError.value = "";
-  }
+  passwordError.value = !password.value;
+  isValid = isValid && !passwordError.value;
 
   // Validate Checkbox
   if (!isChecked.value) {
@@ -132,42 +110,44 @@ const validateFields = () => {
   return isValid;
 };
 
-const nextStep = () => {
-  if (validateFields()) {
-    console.log("submited");
-  }
-};
-
-// const submit = async () => {
+// const nextStep = () => {
 //   if (validateFields()) {
-//     try {
-//       const data = {
-//         email: email.value,
-//         password: password.value,
-//       };
-
-//       const response = await fetch(url, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data),
-//       });
-
-//       if (response.ok) {
-//         console.log("success");
-//       } else {
-//         const responseData = await response.json();
-//         throw new Error(
-//           "Form submission failed with status: " +
-//             response.status +
-//             ". Error message: " +
-//             responseData.error
-//         );
-//       }
-//     } catch (error) {
-//       console.error("Error submitting form:", error);
-//     }
+//     console.log("submited");
 //   }
 // };
+
+const submit = async () => {
+  if (validateFields()) {
+    try {
+      const data = {
+        email: email.value,
+        password: password.value,
+      };
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert("successfully logged in");
+      } else {
+        const responseData = await response.json();
+        alert("there was an issue while logging in");
+        throw new Error(
+          "Form submission failed with status: " +
+            response.status +
+            ". Error message: " +
+            responseData.error
+        );
+      }
+    } catch (error) {
+      alert("there was an issue while logging in");
+      console.error("Error submitting form:", error);
+    }
+  }
+};
 </script>
