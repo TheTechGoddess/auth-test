@@ -1,0 +1,27 @@
+{
+  "name": "nuxtjs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "preview": "nuxt start",
+    "start": "node .output/server/index.mjs",
+    "generate": "nuxt generate"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
+    "nuxt": "^3.7.0",
+    "unplugin-vue-components": "^0.25.2"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
+    "lucide-vue-next": "^0.279.0",
+    "pinia": "^2.1.6"
+  },
+  "overrides": {
+    "vue": "latest"
+  }
+}
