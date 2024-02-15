@@ -70,8 +70,9 @@
           </span>
         </div>
         <div>
-          <div class="flex justify-between items-center mt-10">
-            <Button type="submit">Create Account</Button>
+          <div
+            class="md:flex flex-row-reverse justify-between items-center mt-6 md:mt-16"
+          >
             <p class="ml-2 text-bodytext text-sm font-normal">
               Already have an account?
               <nuxt-link to="/auth/login">
@@ -82,6 +83,7 @@
                 ></nuxt-link
               >
             </p>
+            <Button type="submit" class="mt-4 md:mt-0">Create Account</Button>
           </div>
         </div>
       </div>
@@ -178,10 +180,10 @@ const submit = async () => {
   }
 };
 
-// const nextStep = () => {
-//   if (validateFields()) {
-//     stepsStore.increment();
-//     console.log({ current: stepsStore.count });
-//   }
-// };
+const nextStep = () => {
+  if (validateFields()) {
+    stepsStore.increment();
+    console.log({ current: stepsStore.count });
+  }
+};
 </script>

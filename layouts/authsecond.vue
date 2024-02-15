@@ -4,6 +4,6 @@
     <div class="hidden lg:w-[45%] lg:flex">
       <LayoutAuthSidebar />
     </div>
-    <div class="w-full lg:w-[55%] py-8 px-20"><slot></slot></div>
+    <div class="w-full lg:w-[55%] py-8 px-4 md:px-12 lg:px-20"><slot></slot></div>
   </div>
 </template>

@@ -56,8 +56,7 @@
         <p class="text-bodytext text-sm font-medium">forgot password?</p>
       </div>
       <div>
-        <div class="flex justify-between items-center mt-16">
-          <Button type="submit">Sign In</Button>
+        <div class="md:flex flex-row-reverse justify-between items-center mt-6 md:mt-16">
           <p class="ml-2 text-bodytext text-sm font-normal">
             Don't have an account?
             <nuxt-link to="/auth/register">
@@ -66,6 +65,7 @@
               ></nuxt-link
             >
           </p>
+          <Button type="submit" class="mt-4 md:mt-0">Sign In</Button>
         </div>
       </div>
     </form>

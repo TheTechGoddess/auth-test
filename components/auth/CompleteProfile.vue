@@ -4,7 +4,7 @@
       title="Welcome to Madesoft Academy"
       description="We'd love to know more about"
     />
-    <div class="flex flex-col my-5 space-y-5">
+    <form @submit.prevent="submit" class="flex flex-col my-5 space-y-5">
       <div class="py-3 flex space-x-5">
         <div
           class="mt-2 w-24 h-24 rounded-lg items-center bg-[#E2E2EA] flex justify-center cursor-pointer"
@@ -51,6 +51,9 @@
           </div>
         </div>
       </div>
+      <p v-if="imageError" class="text-[#FF4B41] text-xs mt-1">
+        image is required
+      </p>
       <Input
         type="text"
         name="about"
@@ -71,10 +74,10 @@
       />
       <div>
         <div>
-          <Button @click="nextStep">Next</Button>
+          <Button type="submit">Next</Button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 <script setup>
@@ -85,11 +88,36 @@ import { useStepsStore } from "@/store/steps";
 
 const stepsStore = useStepsStore();
 const image = ref(null);
+const imageError = ref(false);
 const imagePreview = ref(null);
+const about = ref("");
+const aboutError = ref(false);
+const specialties = ref("");
+const specialtiesError = ref(false);
 
-const nextStep = () => {
-  stepsStore.increment();
-  console.log({ current: stepsStore.count });
+const validateFields = () => {
+  let isValid = true;
+
+  // Validate Full Name
+  aboutError.value = !about.value;
+  isValid = isValid && !aboutError.value;
+
+  // Validate Username
+  specialtiesError.value = !specialties.value;
+  isValid = isValid && !specialtiesError.value;
+
+  imageError.value = !image.value;
+  isValid = isValid && !imageError.value;
+
+  // Validate Checkbox
+
+  return isValid;
+};
+
+const submit = () => {
+  if (validateFields()) {
+    stepsStore.increment();
+  }
 };
 
 const handleImageUpload = (event) => {
